@@ -1,0 +1,66 @@
+@(accounts: List[models.Account])
+
+@import helper._
+
+@main("Welcome to Play") {
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Play Template</h1>
+        <div class="hpanel">
+          <div class="panel-body">
+            <table class="table table-responsive table-hover table-striped kt-mb-8">
+              <thead>
+                <tr>
+                  <td>아이디</td>
+                  <td>이름</td>
+                </tr>
+              </thead>
+              <tbody>
+              @if(accounts.isEmpty) {
+                <tr><td colspan="2" class="text-center">@Messages("label.norecord")</td></tr>
+              } else {
+                @for(account <- accounts) {
+                  <tr>
+                    <td>@account.getId()</td>
+                    <td>@account.getName()</td>
+                  </tr>
+                }
+              }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <h1>Vue.js</h1>
+        <div class="hpanel">
+          <div id="app-3" class="panel-body">
+            <table class="table table-responsive table-hover table-striped kt-mb-8">
+              <thead>
+                <tr>
+                  <td>아이디</td>
+                  <td>이름</td>
+                </tr>
+              </thead>
+              <tbody>
+                <template v-if="isEmpty">
+                  <tr><td colspan="2" class="text-center">@Messages("label.norecord")</td></tr>
+                </template>
+                <template v-else>
+                  <tr v-for="account in accounts">
+                    <td>{{ account.id }}</td>
+                    <td>{{ account.name }}</td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="@routes.Assets.versioned("javascripts/vue/accounts.js")" type="text/javascript"></script>
+
+}
